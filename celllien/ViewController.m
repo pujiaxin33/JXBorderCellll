@@ -51,8 +51,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BaseBorderCell *cell = [BaseBorderCell cellWithTableView:tableView indexPath:indexPath];
-    cell.contentBorderColor = [UIColor grayColor];
-    cell.contentBackgroundColor = [UIColor lightGrayColor];
+    cell.contentBorderColor = [UIColor lightGrayColor];
+    cell.contentBackgroundColor = [UIColor whiteColor];
     cell.contentBorderWidth = 1.0;
     cell.contentMargin = 10;
     cell.textLabel.text = [NSString stringWithFormat:@"section%ld--index%ld",(long)indexPath.section,(long)indexPath.row];
