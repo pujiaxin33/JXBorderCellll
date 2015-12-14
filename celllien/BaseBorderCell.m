@@ -29,12 +29,21 @@
     }else {
         cell.borderStyle = BaseCellBorderStyleNoRound;
     }
-    //配置默认值
-    cell.contentBorderColor = [UIColor lightGrayColor];
-    cell.contentBackgroundColor = [UIColor whiteColor];
-    cell.contentBorderWidth = 2.0;
-    cell.contentMargin = 10.0;
     return cell;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        //配置默认值
+        self.contentBorderColor = [UIColor lightGrayColor];
+        self.contentBackgroundColor = [UIColor whiteColor];
+        self.contentBorderWidth = 2.0;
+        self.contentMargin = 10.0;
+        self.contentCornerRadius = CGSizeMake(5, 5);
+    }
+    return self;
 }
 
 - (void)setBorderStyleWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
@@ -61,15 +70,18 @@
 {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
+    
     CAShapeLayer *layer = [CAShapeLayer layer];
     layer.lineWidth = self.contentBorderWidth;
     layer.strokeColor = self.contentBorderColor.CGColor;
     layer.fillColor =  self.contentBackgroundColor.CGColor;
+    
     UIView *view = [[UIView alloc] initWithFrame:self.contentView.bounds];
     [view.layer insertSublayer:layer atIndex:0];
     view.backgroundColor = [UIColor clearColor];
     //用自定义的view代替cell的backgroundView
     self.backgroundView = view;
+    
     CGRect rect = CGRectMake(self.contentMargin, 0, Width - 2*self.contentMargin, Height);
     switch (self.borderStyle) {
         case BaseCellBorderStyleNoRound:
@@ -80,19 +92,19 @@
             break;
         case BaseCellBorderStyleTopRound:
         {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(5, 5)];
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:self.contentCornerRadius];
             layer.path = path.CGPath;
         }
             break;
         case BaseCellBorderStyleBottomRound:
         {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(5, 5)];
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:self.contentCornerRadius];
             layer.path = path.CGPath;
         }
             break;
         case BaseCellBorderStyleAllRound:
         {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(5, 5)];
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:UIRectCornerAllCorners cornerRadii:self.contentCornerRadius];
             layer.path = path.CGPath;
         }
             break;

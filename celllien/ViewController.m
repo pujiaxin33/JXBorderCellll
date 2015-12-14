@@ -50,11 +50,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
+     你也可以这样子
+    BaseBorderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[BaseBorderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    [cell setBorderStyleWithTableView:tableView indexPath:indexPath];
+     */
+    //也可以这样子
     BaseBorderCell *cell = [BaseBorderCell cellWithTableView:tableView indexPath:indexPath];
     cell.contentBorderColor = [UIColor lightGrayColor];
     cell.contentBackgroundColor = [UIColor whiteColor];
     cell.contentBorderWidth = 1.0;
     cell.contentMargin = 10;
+    cell.contentCornerRadius = CGSizeMake(5, 5);
     cell.textLabel.text = [NSString stringWithFormat:@"section%ld--index%ld",(long)indexPath.section,(long)indexPath.row];
     return cell;
 }
