@@ -51,7 +51,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     /*
-     你也可以这样子
+     你可以使用自己的初始化方法
     BaseBorderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[BaseBorderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
